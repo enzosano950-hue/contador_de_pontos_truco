@@ -1,0 +1,172 @@
+import { Pressable, StyleSheet, Text, View } from 'react-native';
+
+import { useState } from 'react';
+
+export default function App() {
+  const [cliques, atualizarCliques] = useState(0);
+  const [cliques1, atualizarCliques2] = useState(0);
+
+  return (
+    <View style={styles.tela}>
+      <Text style={styles.titulo}>TRUCO</Text>
+      <View style={styles.times}>
+        <View style={styles.time}>
+          <Text style={styles.texto}>TIME A</Text>
+
+          <Text style={styles.texto}>Pontuação:</Text>
+
+          <Text style={styles.pontuacao}>{cliques}</Text>
+
+          <Pressable
+            style={styles.botaoMais}
+            onPress={() => {
+              const novaPontuacao = cliques + 1;
+
+              if (novaPontuacao <= 12) {
+                atualizarCliques(novaPontuacao);
+
+                if (novaPontuacao === 12) {
+                  alert('Fim de jogo,o time A ganhou!');
+                }
+              }
+            }}>
+            <Text style={styles.textoBotao}>+1</Text>
+          </Pressable>
+
+          <Pressable
+            style={styles.botaoMenos}
+            onPress={() => {
+              if (cliques > 0) {
+                atualizarCliques(cliques - 1);
+              }
+            }}>
+            <Text style={styles.textoBotao}>-1</Text>
+          </Pressable>
+        </View>
+
+        <View style={styles.time}>
+          <Text style={styles.texto}>TIME B</Text>
+          <Text style={styles.texto}>Pontuação:</Text>
+          <Text style={styles.pontuacao}>{cliques1}</Text>
+
+          <Pressable
+            style={styles.botaoMais}
+            onPress={() => {
+              const novaPontuacao = cliques1 + 1;
+
+              if (novaPontuacao <= 12) {
+                atualizarCliques2(novaPontuacao);
+
+                if (novaPontuacao === 12) {
+                  alert('Fim de jogo,o time B ganhou!');
+                }
+              }
+            }}>
+            <Text style={styles.textoBotao}>+1</Text>
+          </Pressable>
+
+          <Pressable
+            style={styles.botaoMenos}
+            onPress={() => {
+              if (cliques1 > 0) {
+                atualizarCliques2(cliques1 - 1);
+              }
+            }}>
+            <Text style={styles.textoBotao}>-1</Text>
+          </Pressable>
+        </View>
+      </View>
+
+      <Pressable
+        style={styles.botaoNovaPartida}
+        onPress={() => {
+          atualizarCliques(0);
+          atualizarCliques2(0);
+        }}>
+        <Text style={styles.textoNovaPartida}>reiniciar</Text>
+      </Pressable>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  tela: {
+    flex: 1,
+    backgroundColor: 'black',
+  },
+
+  titulo: {
+    color: 'white',
+    fontSize: 36,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginTop: 80,
+  },
+
+  times: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    marginTop: 100,
+  },
+
+  time: {
+    alignItems: 'center',
+    width: '45%',
+  },
+
+  texto: {
+    color: 'white',
+    fontSize: 20,
+    margin: 3,
+  },
+
+  pontuacao: {
+    color: 'white',
+    fontSize: 50,
+    fontWeight: 'bold',
+  },
+
+  botaoMais: {
+    width: 140,
+    height: 65,
+    backgroundColor: 'red',
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 5,
+  },
+
+  botaoMenos: {
+    width: 140,
+    height: 65,
+    backgroundColor: '#333',
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 5,
+  },
+
+  textoBotao: {
+    color: 'white',
+    fontSize: 28,
+    fontWeight: 'bold',
+  },
+
+  botaoNovaPartida: {
+    width: 250,
+    height: 65,
+    backgroundColor: 'blue',
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    marginTop: 60,
+  },
+
+  textoNovaPartida: {
+    color: 'white',
+    fontSize: 22,
+    fontWeight: 'bold',
+  },
+});
